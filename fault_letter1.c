@@ -21,7 +21,8 @@ char *fault_enviro(char **myargs)
 		return (NULL);
 
 	myargs--;
-	length = stringlength(name) + stringlength(histo_str) + stringlength(myargs[0]) + 45;
+	length = stringlength(name) + stringlength(histo_str) +
+	stringlength(myargs[0]) + 45;
 	fault = malloc(sizeof(char) * (length + 1));
 	if (!fault)
 	{
@@ -76,7 +77,8 @@ char *fault_2_exit(char **myargs)
 	if (!histo_str)
 		return (NULL);
 
-	length = stringlength(name) + stringlength(histo_str) + stringlength(myargs[0]) + 27;
+	length = stringlength(name) + stringlength(histo_str) +
+	stringlength(myargs[0]) + 27;
 	fault = malloc(sizeof(char) * (length + 1));
 	if (!fault)
 	{
@@ -112,7 +114,8 @@ char *fault_2_cd(char **myargs)
 
 	if (myargs[0][0] == '-')
 		myargs[0][2] = '\0';
-	length = stringlength(name) + stringlength(histo_str) + stringlength(myargs[0]) + 24;
+	length = stringlength(name) + stringlength(histo_str) +
+	stringlength(myargs[0]) + 24;
 	fault = malloc(sizeof(char) * (length + 1));
 	if (!fault)
 	{
@@ -148,7 +151,8 @@ char *fault_2_syn(char **myargs)
 	if (!histo_str)
 		return (NULL);
 
-	length = stringlength(name) + stringlength(histo_str) + stringlength(myargs[0]) + 33;
+	length = stringlength(name) + stringlength(histo_str) +
+	stringlength(myargs[0]) + 33;
 	fault = malloc(sizeof(char) * (length + 1));
 	if (!fault)
 	{

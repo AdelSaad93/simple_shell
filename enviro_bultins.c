@@ -30,7 +30,7 @@ int simpleshell(char **myargs, char **forehead)
 }
 
 /**
- * simpleshell_setenviro - Changes or adds an environmemental variable to the PATH.
+ * simpleshell_setenviro - Changes or adds an environmemental variable.
  * @myargs: An array of arguments passed to the shell.
  * @forehead: A double pointer to the beginning of myargs.
  *

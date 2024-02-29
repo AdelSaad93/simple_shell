@@ -6,7 +6,7 @@ void aid_unsetenviro(void);
 void aid_histo(void);
 
 /**
- * aid_enviro - Displays information on the simpleshell builtin command 'enviro'.
+ * aid_enviro - Displays information on the simpleshell.
  */
 void aid_enviro(void)
 {
@@ -16,7 +16,7 @@ void aid_enviro(void)
 }
 
 /**
- * aid_setenviro - Displays information on the simpleshell builtin command 'setenviro'.
+ * aid_setenviro - Displays information on the simpleshell.
  */
 void aid_setenviro(void)
 {
@@ -43,3 +43,4 @@ void aid_unsetenviro(void)
 	letter = "letter to stderr.\n";
 	write(STDOUT_FILENO, letter, stringlength(letter));
 }
+

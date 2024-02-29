@@ -17,7 +17,8 @@ char *fault_404(char **myargs)
 	if (!histo_str)
 		return (NULL);
 
-	length = stringlength(name) + stringlength(histo_str) + stringlength(myargs[0]) + 24;
+	length = stringlength(name) + stringlength(histo_str) +
+	stringlength(myargs[0]) + 24;
 	fault = malloc(sizeof(char) * (length + 1));
 	if (!fault)
 	{
@@ -50,7 +51,8 @@ char *fault_505(char **myargs)
 	if (!histo_str)
 		return (NULL);
 
-	length = stringlength(name) + stringlength(histo_str) + stringlength(myargs[0]) + 16;
+	length = stringlength(name) + stringlength(histo_str) +
+	stringlength(myargs[0]) + 16;
 	fault = malloc(sizeof(char) * (length + 1));
 	if (!fault)
 	{

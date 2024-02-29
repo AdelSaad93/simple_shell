@@ -37,7 +37,7 @@ int (*my_bultin(char *mycommand))(char **myargs, char **forehead)
  * simpleshell_out - Causes normal process termination
  *                for the simpleshell shell.
  * @myargs: An array of arguments containing the out value.
- * @front: A double pointer to the beginning of myargs.
+ * @forehead: A double pointer to the beginning of myargs.
  *
  * Return: If there are no arguments - -3.
  *         If the given out value is invalid - 2.
@@ -161,7 +161,7 @@ int simpleshell_cd(char **myargs, char  **forehead)
 /**
  * simpleshell_aid - Displays information about simpleshell builtin commands.
  * @myargs: An array of arguments.
- * @front: A pointer to the beginning of myargs.
+ * @forehead: A pointer to the beginning of myargs.
  *
  * Return: If an fault occurs - -1.
  *         Otherwise - 0.

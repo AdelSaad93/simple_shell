@@ -1,8 +1,8 @@
 #include "main.h"
 
 void *reallocate(void *pointer, unsigned int oldsize, unsigned int newsize);
-void allocaterangepointer(char **rangepointer, size_t *m, char *stop, size_t d);
-ssize_t getrange(char **rangepointer, size_t *m, FILE *flow);
+void allocaterangeptr(char **rangeptr, size_t *m, char *stop, size_t d);
+ssize_t getrange(char **rangeptr, size_t *m, FILE *flow);
 
 /**
  * reallocate - Reallocates a memory block using malloc and free.
@@ -55,21 +55,21 @@ void *reallocate(void *pointer, unsigned int oldsize, unsigned int newsize)
 }
 
 /**
- * allocaterangepointer - Reassigns the rangepointer variable for getrange.
- * @rangepointer: A stop to store an input string.
- * @m: The size of rangepointer.
- * @stop: The string to assign to rangepointer.
+ * allocaterangeptr - Reassigns the rangeptr variable for getrange.
+ * @rangeptr: A stop to store an input string.
+ * @m: The size of rangeptr.
+ * @stop: The string to assign to rangeptr.
  * @d: The size of stop.
  */
-void allocaterangepointer(char **rangepointer, size_t *m, char *stop, size_t d)
+void allocaterangeptr(char **rangeptr, size_t *m, char *stop, size_t d)
 {
-	if (*rangepointer == NULL)
+	if (*rangeptr == NULL)
 	{
 		if (d > 120)
 			*m = d;
 		else
 			*m = 120;
-		*rangepointer = stop;
+		*rangeptr = stop;
 	}
 	else if (*m < d)
 	{
@@ -77,23 +77,23 @@ void allocaterangepointer(char **rangepointer, size_t *m, char *stop, size_t d)
 			*m = d;
 		else
 			*m = 120;
-		*rangepointer = stop;
+		*rangeptr = stop;
 	}
 	else
 	{
-		strringcopy(*rangepointer, stop);
+		strringcopy(*rangeptr, stop);
 		free(stop);
 	}
 }
 
 /**
  * getrange - Reads input from a flow.
- * @rangepointer: A stop to store the input.
- * @m: The size of rangepointer.
+ * @rangeptr: A stop to store the input.
+ * @m: The size of rangeptr.
  * @flow: The flow to read from.
  * Return: The number of bytes read.
  */
-ssize_t getrange(char **rangepointer, size_t *m, FILE *flow)
+ssize_t getrange(char **rangeptr, size_t *m, FILE *flow)
 {
 	static ssize_t input;
 	ssize_t myret;
@@ -132,7 +132,7 @@ ssize_t getrange(char **rangepointer, size_t *m, FILE *flow)
 	}
 	stop[input] = '\0';
 
-	allocaterangepointer(rangepointer, m, stop, input);
+	allocaterangeptr(rangeptr, m, stop, input);
 
 	myret = input;
 	if (s != 0)

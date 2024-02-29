@@ -91,7 +91,7 @@ int histo;
 
 /**
  * struct list_s - A new struct type defining a linked list.
- * @dirct: A dirctory path.
+ * @dirctor: A dirctory path.
  * @next: A pointer to another struct list_s.
  */
 typedef struct list_s
@@ -126,7 +126,7 @@ typedef struct names
 
 name_t *names;
 
-ssize_t getrange(char **rangepointer, size_t *m, FILE *flow);
+ssize_t getrange(char **rangeptr, size_t *m, FILE *flow);
 void *reallocte(void *pointer, unsigned int oldsize, unsigned int newsize);
 char **_strtok(char *line, char *delim);
 char *get_location(char *command);

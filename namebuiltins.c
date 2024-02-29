@@ -52,7 +52,7 @@ int simpleshell_name(char **myargs, char  **forehead)
 
 /**
  * set_name - Will either set an existing name 'name' with a new value,
- * @**myvarname: Name of the name.
+ * @myvarname: Name of the name.
  * @value: value of the name. First character is a '='.
  */
 void set_name(char *myvarname, char *value)
