@@ -38,16 +38,6 @@ char *fault_2_syn(char **myargs);
 char *fault_404(char **myargs);
 char *fault_505(char **myargs);
 
-void handle_line(char **line, ssize_t read);
-void myvariable_replacement(char **myargs, int *exe_myret);
-char *get_myargs(char *line, int *exe_myret);
-int call_myargs(char **myargs, char **forehead, int *exe_myret);
-int run_myargs(char **myargs, char **forehead, int *exe_myret);
-int handle_myargs(int *exe_myret);
-int check_myargs(char **myargs);
-void free_myargs(char **myargs, char **forehead);
-char **replace_names(char **myargs);
-
 int stringlength(const char *s);
 char *stringconcatenate(char *dest, const char *src);
 char *stringnconcatenate(char *dest, const char *src, size_t n);
@@ -66,9 +56,9 @@ int simpleshell_cd(char **myargs, char  **forehead);
 int simpleshell_name(char **myargs, char  **forehead);
 int simpleshell_aid(char **myargs, char  **forehead);
 
-void handle_line(char **line, ssize_t read);
+void handle_range(char **range, ssize_t read);
 void myvariable_replacement(char **myargs, int *exe_myret);
-char *get_myargs(char *line, int *exe_myret);
+char *get_myargs(char *range, int *exe_myret);
 int call_myargs(char **myargs, char **forehead, int *exe_myret);
 int run_myargs(char **myargs, char **forehead, int *exe_myret);
 int handle_myargs(int *exe_myret);
@@ -128,7 +118,7 @@ name_t *names;
 
 ssize_t getrange(char **rangeptr, size_t *m, FILE *flow);
 void *reallocte(void *pointer, unsigned int oldsize, unsigned int newsize);
-char **_strtok(char *line, char *delim);
+char **_strtok(char *range, char *delim);
 char *get_location(char *command);
 list_t *get_path_dirctory(char *path);
 int execute(char **myargs, char **forehead);
