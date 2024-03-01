@@ -20,12 +20,12 @@ int histo;
 
 /**
  * struct list_s - A new struct type defining a linked list.
- * @dirct: A dirctory path.
+ * @dirctor: A dirctorory path.
  * @next: A pointer to another struct list_s.
  */
 typedef struct list_s
 {
-	char *dirct;
+	char *dirctor;
 	struct list_s *next;
 } list_t;
 
@@ -59,7 +59,7 @@ ssize_t getrange(char **rangeptr, size_t *m, FILE *flow);
 void *reallocte(void *pointer, unsigned int oldsize, unsigned int newsize);
 char **stringtoken(char *range, char *delim);
 char *get_location(char *command);
-list_t *get_path_dirctory(char *path);
+list_t *get_path_dirctorory(char *path);
 int execute(char **myargs, char **forehead);
 void free_list(list_t *forehead);
 char *intostr(int number);
@@ -108,7 +108,7 @@ char *fault_505(char **myargs);
 
 name_t *add_name_end(name_t **forehead, char *name, char *value);
 void free_name_list(name_t *forehead);
-list_t *add_node_end(list_t **forehead, char *dirct);
+list_t *add_node_end(list_t **forehead, char *dirctor);
 void free_list(list_t *forehead);
 
 void aid_all(void);

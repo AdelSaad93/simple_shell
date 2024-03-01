@@ -103,8 +103,8 @@ int simpleshell_cd(char **myargs, char  **forehead)
 			if ((myargs[0][1] == '-' && myargs[0][2] == '\0') ||
 					myargs[0][1] == '\0')
 			{
-				if (_getenviro("oldpw") != NULL)
-					(chdir(*_getenviro("oldpw") + 7));
+				if (getenviro("oldpw") != NULL)
+					(chdir(*getenviro("oldpw") + 7));
 			}
 			else
 			{
@@ -126,8 +126,8 @@ int simpleshell_cd(char **myargs, char  **forehead)
 	}
 	else
 	{
-		if (_getenviro("HOME") != NULL)
-			chdir(*(_getenviro("HOME")) + 5);
+		if (getenviro("HOME") != NULL)
+			chdir(*(getenviro("HOME")) + 5);
 	}
 
 	pw = getcw(pw, 0);
