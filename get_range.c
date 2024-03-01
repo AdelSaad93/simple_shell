@@ -81,7 +81,7 @@ void allocaterangeptr(char **rangeptr, size_t *m, char *stop, size_t d)
 	}
 	else
 	{
-		strringcopy(*rangeptr, stop);
+		stringcopy(*rangeptr, stop);
 		free(stop);
 	}
 }
@@ -110,7 +110,7 @@ ssize_t getrange(char **rangeptr, size_t *m, FILE *flow)
 	if (!stop)
 		return (-1);
 
-	while (c != '\m')
+	while (c != '\n')
 	{
 		s = read(STDIN_FILENO, &c, 1);
 		if (s == -1 || (s == 0 && input == 0))
@@ -139,3 +139,4 @@ ssize_t getrange(char **rangeptr, size_t *m, FILE *flow)
 		input = 0;
 	return (myret);
 }
+

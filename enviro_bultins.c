@@ -52,7 +52,7 @@ int simpleshell_setenviro(char **myargs, char **forehead)
 	stringconcatenate(new_value, "=");
 	stringconcatenate(new_value, myargs[1]);
 
-	env_var = _getenv(myargs[0]);
+	env_var = getenviro(myargs[0]);
 	if (env_var)
 	{
 		free(*env_var);
@@ -96,7 +96,7 @@ int simpleshell_unsetenviro(char **myargs, char **forehead)
 
 	if (!myargs[0])
 		return (create_fault(myargs, -1));
-	env_var = _getenv(myargs[0]);
+	env_var = getenviro(myargs[0]);
 	if (!env_var)
 		return (0);
 
@@ -123,3 +123,4 @@ int simpleshell_unsetenviro(char **myargs, char **forehead)
 
 	return (0);
 }
+

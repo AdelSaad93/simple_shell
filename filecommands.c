@@ -20,8 +20,8 @@ int cannotopen(char *file_path)
 	if (!histoostring)
 		return (122);
 
-	length = stringlengthgth(name) + stringlengthgth(histoostring)
-	 + stringlengthgth(file_path) + 16;
+	length = stringlength(name) + stringlength(histoostring)
+	 + stringlength(file_path) + 16;
 	fault = malloc(sizeof(char) * (length + 1));
 	if (!fault)
 	{
@@ -53,9 +53,9 @@ int cannotopen(char *file_path)
 int filecommands(char *file_path, int *exe_myret)
 {
 	ssize_t file, b_read, i;
-	unsigned int line_size = 0;
+	unsigned int range_size = 0;
 	unsigned int oldsize = 120;
-	char *line, **myargs, **front;
+	char *range, **myargs, **forehead;
 	char buffer[120];
 	int ret;
 
@@ -66,34 +66,34 @@ int filecommands(char *file_path, int *exe_myret)
 		*exe_myret = cannotopen(file_path);
 		return (*exe_myret);
 	}
-	line = malloc(sizeof(char) * oldsize);
-	if (!line)
+	range = malloc(sizeof(char) * oldsize);
+	if (!range)
 		return (-1);
 	do {
 		b_read = read(file, buffer, 119);
-		if (b_read == 0 && line_size == 0)
+		if (b_read == 0 && range_size == 0)
 			return (*exe_myret);
 		buffer[b_read] = '\0';
-		line_size += b_read;
-		line = realloate(line, oldsize, line_size);
-		stringconcatenate(line, buffer);
-		oldsize = line_size;
+		range_size += b_read;
+		range = reallocte(range, oldsize, range_size);
+		stringconcatenate(range, buffer);
+		oldsize = range_size;
 	} while (b_read);
-	for (i = 0; line[i] == '\n'; i++)
-		line[i] = ' ';
-	for (; i < line_size; i++)
+	for (i = 0; range[i] == '\n'; i++)
+		range[i] = ' ';
+	for (; i < range_size; i++)
 	{
-		if (line[i] == '\n')
+		if (range[i] == '\n')
 		{
-			line[i] = ';';
-			for (i += 1; i < line_size && line[i] == '\n'; i++)
-				line[i] = ' ';
+			range[i] = ';';
+			for (i += 1; i < range_size && range[i] == '\n'; i++)
+				range[i] = ' ';
 		}
 	}
-	variable_replacement(&line, exe_myret);
-	handle_line(&line, line_size);
-	myargs = stringtoken(line, " ");
-	free(line);
+	myvariable_replacement(&range, exe_myret);
+	handle_range(&range, range_size);
+	myargs = stringtoken(range, " ");
+	free(range);
 	if (!myargs)
 		return (0);
 	if (check_myargs(myargs) != 0)
@@ -102,7 +102,7 @@ int filecommands(char *file_path, int *exe_myret)
 		free_myargs(myargs, myargs);
 		return (*exe_myret);
 	}
-	front = myargs;
+	forehead = myargs;
 
 	for (i = 0; myargs[i]; i++)
 	{
@@ -110,14 +110,15 @@ int filecommands(char *file_path, int *exe_myret)
 		{
 			free(myargs[i]);
 			myargs[i] = NULL;
-			ret = call_myargs(myargs, front, exe_myret);
+			ret = call_myargs(myargs, forehead, exe_myret);
 			myargs = &myargs[++i];
 			i = 0;
 		}
 	}
 
-	ret = call_myargs(myargs, front, exe_myret);
+	ret = call_myargs(myargs, forehead, exe_myret);
 
-	free(front);
+	free(forehead);
 	return (ret);
 }
+

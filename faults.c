@@ -92,7 +92,7 @@ int create_fault(char **myargs, int fau)
 		break;
 	case 2:
 		if (*(myargs[0]) == 'e')
-			fault = fault_2_exit(++myargs);
+			fault = fault_2_out(++myargs);
 		else if (myargs[0][0] == ';' || myargs[0][0] == '&' || myargs[0][0] == '|')
 			fault = fault_2_syn(myargs);
 		else
@@ -112,3 +112,4 @@ int create_fault(char **myargs, int fau)
 	return (fau);
 
 }
+

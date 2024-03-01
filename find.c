@@ -28,13 +28,13 @@ char *getlocation(char *command)
 		if (!temp)
 			return (NULL);
 
-		_strcpy(temp, dirctors->dirctor);
+		stringcopy(temp, dirctors->dirctor);
 		stringconcatenate(temp, "/");
 		stringconcatenate(temp, command);
 
 		if (stat(temp, &st) == 0)
 		{
-			free_list(head);
+			freelist(head);
 			return (temp);
 		}
 
@@ -42,7 +42,7 @@ char *getlocation(char *command)
 		free(temp);
 	}
 
-	free_list(head);
+	freelist(head);
 
 	return (NULL);
 }
@@ -94,7 +94,7 @@ char *fillpathdirctorector(char *path)
 		}
 		else
 		{
-			_strncat(path_copy, &path[i], 1);
+			stringnconcatenate(path_copy, &path[i], 1);
 		}
 	}
 	return (path_copy);
@@ -122,9 +122,9 @@ list_t *getpathdirctorector(char *path)
 
 	for (index = 0; dirctors[index]; index++)
 	{
-		if (add_node_end(&head, dirctors[index]) == NULL)
+		if (addnodeend(&head, dirctors[index]) == NULL)
 		{
-			free_list(head);
+			freelist(head);
 			free(dirctors);
 			return (NULL);
 		}
@@ -134,3 +134,4 @@ list_t *getpathdirctorector(char *path)
 
 	return (head);
 }
+

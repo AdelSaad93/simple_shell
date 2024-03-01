@@ -55,7 +55,6 @@ void free_enviro(void)
 /**
  * get_enviro - Gets an environmental myvariable from the PATH.
  * @myvar: The name of the environmental myvariable to get.
- *
  * Return: If the environmental myvariable does not exist - NULL.
  *  Otherwise - a pointer to the environmental myvariable.
  */
@@ -66,9 +65,10 @@ char **get_enviro(const char *myvar)
 	length = stringlength(myvar);
 	for (list = 0; environme[list]; list++)
 	{
-		if (_strncmp(myvar, environme[list], length) == 0)
+		if (stringncompare(myvar, environme[list], length) == 0)
 			return (&environme[list]);
 	}
 
 	return (NULL);
 }
+

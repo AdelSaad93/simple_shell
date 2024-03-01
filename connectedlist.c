@@ -22,14 +22,14 @@ name_t *addnameend(name_t **head, char *name, char *value)
 		return (NULL);
 
 	newnode->next = NULL;
-	newnode->name = malloc(sizeof(char) * (_strlen(name) + 1));
+	newnode->name = malloc(sizeof(char) * (stringlength(name) + 1));
 	if (!newnode->name)
 	{
 		free(newnode);
 		return (NULL);
 	}
 	newnode->value = value;
-	_strcpy(newnode->name, name);
+	stringcopy(newnode->name, name);
 
 	if (*head)
 	{
@@ -110,3 +110,4 @@ void freelist(list_t *head)
 		head = next;
 	}
 }
+

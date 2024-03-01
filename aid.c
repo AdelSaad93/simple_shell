@@ -3,7 +3,7 @@
 void free_myargs(char **myargs, char **forehead);
 char *getproid(void);
 char *get_enviro_value(char *start, int length);
-void variable_replacement(char **myargs, int *exe_ret);
+void myvariable_replacement(char **myargs, int *exe_myret);
 
 /**
  * free_myargs - Frees up memory taken by myargs.
@@ -71,7 +71,7 @@ char *get_enviro_value(char *start, int length)
 	myvar[0] = '\0';
 	stringnconcatenate(myvar, start, length);
 
-	myvar_addr = _getenviro(myvar);
+	myvar_addr = getenviro(myvar);
 	free(myvar);
 	if (myvar_addr)
 	{
@@ -81,20 +81,20 @@ char *get_enviro_value(char *start, int length)
 		tempo++;
 		replacement = malloc(stringlength(tempo) + 1);
 		if (replacement)
-			_strcpy(replacement, tempo);
+			stringcopy(replacement, tempo);
 	}
 
 	return (replacement);
 }
 
 /**
- * variable_replacement - Handles variable replacement.
+ * myvariable_replacement - Handles variable replacement.
  * @range: A double pointer containing the command and arguments.
- * @exe_ret: A pointer to the return value of the last executed command.
+ * @exe_myret: A pointer to the return value of the last executed command.
  *
  * Description: Replaces $$ with the current PID, $? with the return value
  */
-void variable_replacement(char **range, int *exe_ret)
+void myvariable_replacement(char **range, int *exe_myret)
 {
 	int j, k = 0, length;
 	char *replacement = NULL, *old_line = NULL, *new_line;
@@ -112,7 +112,7 @@ void variable_replacement(char **range, int *exe_ret)
 			}
 			else if (old_line[j + 1] == '?')
 			{
-				replacement = _itoa(*exe_ret);
+				replacement = intostr(*exe_myret);
 				k = j + 2;
 			}
 			else if (old_line[j + 1])
@@ -144,3 +144,4 @@ void variable_replacement(char **range, int *exe_ret)
 		}
 	}
 }
+
