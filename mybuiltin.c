@@ -73,7 +73,7 @@ int simpleshell_out(char **myargs, char **forehead)
 	myargs -= 1;
 	free_myargs(myargs, forehead);
 	free_enviro();
-	free_name_list(names);
+	freenamelist(names);
 	exit(num);
 }
 
@@ -81,7 +81,6 @@ int simpleshell_out(char **myargs, char **forehead)
  * simpleshell_cd - Changes the current directory of the simpleshell process.
  * @myargs: An array of arguments.
  * @forehead: A double pointer to the beginning of myargs.
- *
  * Return: If the given string is not a directory - 2.
  *         If an fault occurs - -1.
  *         Otherwise - 0.
@@ -89,11 +88,11 @@ int simpleshell_out(char **myargs, char **forehead)
 int simpleshell_cd(char **myargs, char  **forehead)
 {
 	char **dirctinfor, *newline = "\n";
-	char *oldpw = NULL, *pw = NULL;
+	char *oldpwd = NULL, *pw = NULL;
 	struct stat dir;
 
-	oldpw = getcw(oldpw, 0);
-	if (!oldpw)
+	oldpwd = getcwd(oldpwd, 0);
+	if (!oldpwd)
 		return (-1);
 
 	if (myargs[0])
@@ -103,12 +102,12 @@ int simpleshell_cd(char **myargs, char  **forehead)
 			if ((myargs[0][1] == '-' && myargs[0][2] == '\0') ||
 					myargs[0][1] == '\0')
 			{
-				if (getenviro("oldpw") != NULL)
-					(chdir(*getenviro("oldpw") + 7));
+				if (getenviro("oldpwd") != NULL)
+					(chdir(*getenviro("oldpwd") + 7));
 			}
 			else
 			{
-				free(oldpw);
+				free(oldpwd);
 				return (create_fault(myargs, 2));
 			}
 		}
@@ -119,7 +118,7 @@ int simpleshell_cd(char **myargs, char  **forehead)
 				chdir(myargs[0]);
 			else
 			{
-				free(oldpw);
+				free(oldpwd);
 				return (create_fault(myargs, 2));
 			}
 		}
@@ -130,7 +129,7 @@ int simpleshell_cd(char **myargs, char  **forehead)
 			chdir(*(getenviro("HOME")) + 5);
 	}
 
-	pw = getcw(pw, 0);
+	pw = getcwd(pw, 0);
 	if (!pw)
 		return (-1);
 
@@ -138,8 +137,8 @@ int simpleshell_cd(char **myargs, char  **forehead)
 	if (!dirctinfor)
 		return (-1);
 
-	dirctinfor[0] = "oldpw";
-	dirctinfor[1] = oldpw;
+	dirctinfor[0] = "oldpwd";
+	dirctinfor[1] = oldpwd;
 	if (simpleshell_setenviro(dirctinfor, dirctinfor) == -1)
 		return (-1);
 
@@ -152,7 +151,7 @@ int simpleshell_cd(char **myargs, char  **forehead)
 		write(STDOUT_FILENO, pw, stringlength(pw));
 		write(STDOUT_FILENO, newline, 1);
 	}
-	free(oldpw);
+	free(oldpwd);
 	free(pw);
 	free(dirctinfor);
 	return (0);

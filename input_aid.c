@@ -22,7 +22,7 @@ char *get_myargs(char *range, int *exe_myret)
 	if (range)
 		free(range);
 
-	read = _getrange(&range, &n, STDIN_FILENO);
+	read = getrange(&range, &n, STDIN_FILENO);
 	if (read == -1)
 		return (NULL);
 	if (read == 1)
@@ -34,7 +34,7 @@ char *get_myargs(char *range, int *exe_myret)
 	}
 
 	range[read - 1] = '\0';
-	variable_replacement(&range, exe_myret);
+	myvariable_replacement(&range, exe_myret);
 	handle_range(&range, read);
 
 	return (range);
@@ -55,11 +55,11 @@ int call_myargs(char **myargs, char **forehead, int *exe_myret)
 		return (*exe_myret);
 	for (index = 0; myargs[index]; index++)
 	{
-		if (_strncmp(myargs[index], "||", 2) == 0)
+		if (stringncompare(myargs[index], "||", 2) == 0)
 		{
 			free(myargs[index]);
 			myargs[index] = NULL;
-			myargs = replace_aliases(myargs);
+			myargs = replace_names(myargs);
 			myret = run_myargs(myargs, forehead, exe_myret);
 			if (*exe_myret != 0)
 			{
@@ -73,11 +73,11 @@ int call_myargs(char **myargs, char **forehead, int *exe_myret)
 				return (myret);
 			}
 		}
-		else if (_strncmp(myargs[index], "&&", 2) == 0)
+		else if (stringncompare(myargs[index], "&&", 2) == 0)
 		{
 			free(myargs[index]);
 			myargs[index] = NULL;
-			myargs = replace_aliases(myargs);
+			myargs = replace_names(myargs);
 			myret = run_myargs(myargs, forehead, exe_myret);
 			if (*exe_myret == 0)
 			{
@@ -92,7 +92,7 @@ int call_myargs(char **myargs, char **forehead, int *exe_myret)
 			}
 		}
 	}
-	myargs = replace_aliases(myargs);
+	myargs = replace_names(myargs);
 	myret = run_myargs(myargs, forehead, exe_myret);
 	return (myret);
 }
@@ -148,7 +148,7 @@ int handle_myargs(int *exe_myret)
 	if (!range)
 		return (END_OF_FILE);
 
-	myargs = _strtok(range, " ");
+	myargs = stringtoken(range, " ");
 	free(range);
 	if (!myargs)
 		return (myret);
@@ -162,7 +162,7 @@ int handle_myargs(int *exe_myret)
 
 	for (index = 0; myargs[index]; index++)
 	{
-		if (_strncmp(myargs[index], ";", 1) == 0)
+		if (stringncompare(myargs[index], ";", 1) == 0)
 		{
 			free(myargs[index]);
 			myargs[index] = NULL;
@@ -203,3 +203,4 @@ int check_myargs(char **myargs)
 	}
 	return (0);
 }
+

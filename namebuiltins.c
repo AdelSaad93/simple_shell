@@ -84,7 +84,7 @@ void set_name(char *myvarname, char *value)
 		tempo = tempo->next;
 	}
 	if (!tempo)
-		add_name_end(&names, myvarname, value);
+		addnameend_end(&names, myvarname, value);
 }
 
 /**
