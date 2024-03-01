@@ -48,10 +48,8 @@ char *getlocation(char *command)
 }
 
 /**
- * fillpathdirctorector - Copies path but also replaces leading/sandwiched/trailing
- *		   colons (:) with current working dirctorectory.
+ * fillpathdirctorector - Copies path but also replaces.
  * @path: The colon-separated list of dirctorectories.
- *
  * Return: A copy of path with any leading/sandwiched/trailing colons replaced
  *	   with the current working dirctorectory.
  */

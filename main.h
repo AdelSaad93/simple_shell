@@ -61,7 +61,7 @@ char **stringtoken(char *range, char *delim);
 char *get_location(char *command);
 list_t *get_path_dirctorory(char *path);
 int execute(char **myargs, char **forehead);
-void free_list(list_t *forehead);
+void freelist(list_t *forehead);
 char *intostr(int number);
 
 void handle_range(char **range, ssize_t read);
@@ -106,10 +106,10 @@ char *fault_2_syn(char **myargs);
 char *fault_404(char **myargs);
 char *fault_505(char **myargs);
 
-name_t *add_name_end(name_t **forehead, char *name, char *value);
-void free_name_list(name_t *forehead);
-list_t *add_node_end(list_t **forehead, char *dirctor);
-void free_list(list_t *forehead);
+name_t *addnameend_end(name_t **forehead, char *name, char *value);
+void freenamelist(name_t *forehead);
+list_t *addnodeend(list_t **forehead, char *dirctor);
+void freelist(list_t *forehead);
 
 void aid_all(void);
 void aid_name(void);
