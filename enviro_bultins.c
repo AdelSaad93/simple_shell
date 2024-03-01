@@ -1,8 +1,8 @@
 #include "main.h"
 
-int simpleshell(char **myargs, char **forehead);
-int simpleshell_setenviro(char **myargs, char **forehead);
-int simpleshell_unsetenviro(char **myargs, char **forehead);
+int simpleshell(char **myargs);
+int simpleshell_setenviro(char **myargs);
+int simpleshell_unsetenviro(char **myargs);
 
 /**
  * simpleshell - Prints the current environment.
@@ -11,7 +11,7 @@ int simpleshell_unsetenviro(char **myargs, char **forehead);
  *
  * Return: If an fault occurs -1 Otherwise 0.
  */
-int simpleshell(char **myargs, char **forehead)
+int simpleshell(char **myargs)
 {
 	int list;
 	char nc = '\n';
@@ -36,7 +36,7 @@ int simpleshell(char **myargs, char **forehead)
  *
  * Return: If an fault occurs -1 Otherwise 0.
  */
-int simpleshell_setenviro(char **myargs, char **forehead)
+int simpleshell_setenviro(char **myargs)
 {
 	char **env_var = NULL, **new_environme, *new_value;
 	size_t size;
@@ -88,7 +88,7 @@ int simpleshell_setenviro(char **myargs, char **forehead)
  * Return: If an fault occurs -1 Otherwise 0.
  *
  */
-int simpleshell_unsetenviro(char **myargs, char **forehead)
+int simpleshell_unsetenviro(char **myargs)
 {
 	char **env_var, **new_environme;
 	size_t size;

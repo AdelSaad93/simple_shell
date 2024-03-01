@@ -1,8 +1,8 @@
 #include "main.h"
-int (*my_bultin(char *mycommand))(char **myargs, char **forehead);
+int (*my_bultin(char *mycommand))(char **myargs);
 int simpleshell_out(char **myargs, char **forehead);
-int simpleshell_cd(char **myargs, char  **forehead);
-int simpleshell_aid(char **myargs, char  **forehead);
+int simpleshell_cd(char **myargs);
+int simpleshell_aid(char **myargs);
 
 /**
  * my_bultin - Matches a command with a corresponding
@@ -11,7 +11,7 @@ int simpleshell_aid(char **myargs, char  **forehead);
  *
  * Return: A function pointer to the corresponding builtin.
  */
-int (*my_bultin(char *mycommand))(char **myargs, char **forehead)
+int (*my_bultin(char *mycommand))(char **myargs)
 {
 	builtin_t functions[] = {
 		{ "out", simpleshell_out },
@@ -42,7 +42,6 @@ int (*my_bultin(char *mycommand))(char **myargs, char **forehead)
  * Return: If there are no arguments - -3.
  *         If the given out value is invalid - 2.
  *        otherwise outs with the given status value.
- *
  */
 int simpleshell_out(char **myargs, char **forehead)
 {
@@ -80,15 +79,14 @@ int simpleshell_out(char **myargs, char **forehead)
 /**
  * simpleshell_cd - Changes the current directory of the simpleshell process.
  * @myargs: An array of arguments.
- * @forehead: A double pointer to the beginning of myargs.
  * Return: If the given string is not a directory - 2.
  *         If an fault occurs - -1.
  *         Otherwise - 0.
  */
-int simpleshell_cd(char **myargs, char  **forehead)
+int simpleshell_cd(char **myargs)
 {
 	char **dirctinfor, *newline = "\n";
-	char *oldpwd = NULL, *pw = NULL;
+	char *oldpwd = NULL, *pwd = NULL;
 	struct stat dir;
 
 	oldpwd = getcwd(oldpwd, 0);
@@ -102,8 +100,8 @@ int simpleshell_cd(char **myargs, char  **forehead)
 			if ((myargs[0][1] == '-' && myargs[0][2] == '\0') ||
 					myargs[0][1] == '\0')
 			{
-				if (getenviro("oldpwd") != NULL)
-					(chdir(*getenviro("oldpwd") + 7));
+				if (getenviro("OLDPWD") != NULL)
+					(chdir(*getenviro("OLDPWD") + 7));
 			}
 			else
 			{
@@ -129,30 +127,31 @@ int simpleshell_cd(char **myargs, char  **forehead)
 			chdir(*(getenviro("HOME")) + 5);
 	}
 
-	pw = getcwd(pw, 0);
-	if (!pw)
+	pwd = getcwd(pwd, 0);
+	if (!pwd)
 		return (-1);
 
-	dirctinfor = malloc(sizeof(char *) * 2);
+	dirctinfor = malloc(sizeof(char *) * 3);
 	if (!dirctinfor)
 		return (-1);
 
-	dirctinfor[0] = "oldpwd";
+	dirctinfor[0] = "OLDPWD";
 	dirctinfor[1] = oldpwd;
-	if (simpleshell_setenviro(dirctinfor, dirctinfor) == -1)
+	dirctinfor[1] = NULL;
+	if (simpleshell_setenviro(dirctinfor) == -1)
 		return (-1);
 
 	dirctinfor[0] = "PWD";
-	dirctinfor[1] = pw;
-	if (simpleshell_setenviro(dirctinfor, dirctinfor) == -1)
+	dirctinfor[1] = pwd;
+	if (simpleshell_setenviro(dirctinfor) == -1)
 		return (-1);
 	if (myargs[0] && myargs[0][0] == '-' && myargs[0][1] != '-')
 	{
-		write(STDOUT_FILENO, pw, stringlength(pw));
+		write(STDOUT_FILENO, pwd, stringlength(pwd));
 		write(STDOUT_FILENO, newline, 1);
 	}
 	free(oldpwd);
-	free(pw);
+	free(pwd);
 	free(dirctinfor);
 	return (0);
 }
@@ -160,12 +159,11 @@ int simpleshell_cd(char **myargs, char  **forehead)
 /**
  * simpleshell_aid - Displays information about simpleshell builtin commands.
  * @myargs: An array of arguments.
- * @forehead: A pointer to the beginning of myargs.
  *
  * Return: If an fault occurs - -1.
  *         Otherwise - 0.
  */
-int simpleshell_aid(char **myargs, char  **forehead)
+int simpleshell_aid(char **myargs)
 {
 	if (!myargs[0])
 		aid_all();

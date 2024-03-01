@@ -37,7 +37,7 @@ typedef struct list_s
 typedef struct builtin_s
 {
 	char *name;
-	int (*f)(char **argv, char **forehead);
+	int (*f)(char **myargs, char **forehead);
 } builtin_t;
 
 /**
@@ -57,11 +57,11 @@ name_t *names;
 
 ssize_t getrange(char **rangeptr, size_t *m, FILE *flow);
 void *reallocte(void *pointer, unsigned int oldsize, unsigned int newsize);
-char **stringtoken(char *range, char *delim);
+char **stringtoken(char *range, char *delimiter);
 char *get_location(char *command);
-list_t *get_path_dirctorory(char *path);
+list_t *getpathdirctorector(char *path);
 int execute(char **myargs, char **forehead);
-void freelist(list_t *forehead);
+void freelist(list_t *head);
 char *intostr(int number);
 
 void handle_range(char **range, ssize_t read);
@@ -86,11 +86,11 @@ int stringncompare(const char *s1, const char *s2, size_t n);
 int (*get_builtin(char *command))(char **myargs, char **forehead);
 int simpleshell_out(char **myargs, char **forehead);
 int simpleshell_environme(char **myargs, char  **forehead);
-int simpleshell_setenviro(char **myargs, char  **forehead);
-int simpleshell_unsetenviro(char **myargs, char  **forehead);
-int simpleshell_cd(char **myargs, char  **forehead);
-int simpleshell_name(char **myargs, char  **forehead);
-int simpleshell_aid(char **myargs, char  **forehead);
+int simpleshell_setenviro(char **myargs);
+int simpleshell_unsetenviro(char **myargs);
+int simpleshell_cd(char **myargs);
+int simpleshell_name(char **myargs);
+int simpleshell_aid(char **myargs);
 
 
 char **_copyenviro(void);
@@ -107,7 +107,7 @@ char *fault_404(char **myargs);
 char *fault_505(char **myargs);
 
 name_t *addnameend_end(name_t **forehead, char *name, char *value);
-void freenamelist(name_t *forehead);
+void freenamelist(name_t *head);
 list_t *addnodeend(list_t **forehead, char *dirctor);
 void freelist(list_t *forehead);
 

@@ -1,6 +1,6 @@
 #include "main.h"
 
-int simpleshell_name(char **myargs, char  **forehead);
+int simpleshell_name(char **myargs);
 void set_name(char *myvarname, char *value);
 void print_name(name_t *name);
 
@@ -10,7 +10,7 @@ void print_name(name_t *name);
  * @forehead: A double pointer to the beginning of myargs.
  * Return: If an fault occurs -1 Otherwise 0.
  */
-int simpleshell_name(char **myargs, char  **forehead)
+int simpleshell_name(char **myargs)
 {
 	name_t *tempo = names;
 	int i, myret = 0;
@@ -59,32 +59,32 @@ void set_name(char *myvarname, char *value)
 {
 	name_t *tempo = names;
 	int length, a, b;
-	char *value;
+	char *mynewvalue;
 
 	*value = '\0';
 	value++;
 	length = stringlength(value) - stringsubstring(value, "'\"");
-	value = malloc(sizeof(char) * (length + 1));
-	if (!value)
+	mynewvalue = malloc(sizeof(char) * (length + 1));
+	if (!mynewvalue)
 		return;
 	for (a = 0, b = 0; value[a]; a++)
 	{
 		if (value[a] != '\'' && value[a] != '"')
-			value[b++] = value[a];
+			mynewvalue[b++] = value[a];
 	}
-	value[b] = '\0';
+	mynewvalue[b] = '\0';
 	while (tempo)
 	{
 		if (stringcompare(myvarname, tempo->name) == 0)
 		{
 			free(tempo->value);
-			tempo->value = value;
+			tempo->value = mynewvalue;
 			break;
 		}
 		tempo = tempo->next;
 	}
 	if (!tempo)
-		addnameend_end(&names, myvarname, value);
+		addnameend_end(&names, myvarname, mynewvalue);
 }
 
 /**
@@ -118,7 +118,7 @@ char **replace_names(char **myargs)
 {
 	name_t *tempo;
 	int i;
-	char **mynewvalue;
+	char *mynewvalue;
 
 	if (stringcompare(myargs[0], "name") == 0)
 		return (myargs);

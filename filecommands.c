@@ -21,7 +21,7 @@ int cannotopen(char *file_path)
 		return (122);
 
 	length = stringlength(name) + stringlength(histoostring)
-	 + stringlength(file_path) + 16;
+	+ stringlength(file_path) + 16;
 	fault = malloc(sizeof(char) * (length + 1));
 	if (!fault)
 	{

@@ -115,7 +115,7 @@ int run_myargs(char **myargs, char **forehead, int *exe_myret)
 	if (builtin)
 	{
 		myret = builtin(myargs + 1, forehead);
-		if (myret != EXIT)
+		if (myret != out)
 			*exe_myret = myret;
 	}
 	else
