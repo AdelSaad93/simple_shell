@@ -14,47 +14,55 @@
 #define END_OF_FILE -2
 #define out -3
 
-void aid_all(void);
-void aid_name(void);
-void aid_cd(void);
-void aid_out(void);
-void aid_aid(void);
-void aid_enviro(void);
-void aid_setenviro(void);
-void aid_unsetenviro(void);
-void aid_histo(void);
-int process_file_commands(char *file_path, int *exe_myret);
+extern char **environme;
+char *name;
+int histo;
 
-char **_copyenviro(void);
-void free_enviro(void);
-char **_getenviro(const char *myvar);
+/**
+ * struct list_s - A new struct type defining a linked list.
+ * @dirct: A dirctory path.
+ * @next: A pointer to another struct list_s.
+ */
+typedef struct list_s
+{
+	char *dirct;
+	struct list_s *next;
+} list_t;
 
-int create_fault(char **myargs, int fau);
-char *fault_enviro(char **myargs);
-char *fault_1(char **myargs);
-char *fault_2_out(char **myargs);
-char *fault_2_cd(char **myargs);
-char *fault_2_syn(char **myargs);
-char *fault_404(char **myargs);
-char *fault_505(char **myargs);
+/**
+ * struct builtin_s - A new struct type defining builtin commands.
+ * @name: The name of the builtin command.
+ * @f: A function pointer to the builtin command's function.
+ */
+typedef struct builtin_s
+{
+	char *name;
+	int (*f)(char **argv, char **forehead);
+} builtin_t;
 
-int stringlength(const char *s);
-char *stringconcatenate(char *dest, const char *src);
-char *stringnconcatenate(char *dest, const char *src, size_t n);
-char *stringcopy(char *dest, const char *src);
-char *stringcharacter(char *s, char c);
-int stringsubstring(char *s, char *accept);
-int stringcompare(char *s1, char *s2);
-int stringncompare(const char *s1, const char *s2, size_t n);
+/**
+ * struct names - A new struct defining names.
+ * @name: The name of the name.
+ * @value: The value of the name.
+ * @next: A pointer to another struct names.
+ */
+typedef struct names
+{
+	char *name;
+	char *value;
+	struct names *next;
+} name_t;
 
-int (*get_builtin(char *command))(char **myargs, char **forehead);
-int simpleshell_out(char **myargs, char **forehead);
-int simpleshell_environme(char **myargs, char  **forehead);
-int simpleshell_setenviro(char **myargs, char  **forehead);
-int simpleshell_unsetenviro(char **myargs, char  **forehead);
-int simpleshell_cd(char **myargs, char  **forehead);
-int simpleshell_name(char **myargs, char  **forehead);
-int simpleshell_aid(char **myargs, char  **forehead);
+name_t *names;
+
+ssize_t getrange(char **rangeptr, size_t *m, FILE *flow);
+void *reallocte(void *pointer, unsigned int oldsize, unsigned int newsize);
+char **stringtoken(char *range, char *delim);
+char *get_location(char *command);
+list_t *get_path_dirctory(char *path);
+int execute(char **myargs, char **forehead);
+void free_list(list_t *forehead);
+char *intostr(int number);
 
 void handle_range(char **range, ssize_t read);
 void myvariable_replacement(char **myargs, int *exe_myret);
@@ -75,55 +83,45 @@ int stringsubstring(char *s, char *accept);
 int stringcompare(char *s1, char *s2);
 int stringncompare(const char *s1, const char *s2, size_t n);
 
-extern char **environme;
-char *name;
-int histo;
+int (*get_builtin(char *command))(char **myargs, char **forehead);
+int simpleshell_out(char **myargs, char **forehead);
+int simpleshell_environme(char **myargs, char  **forehead);
+int simpleshell_setenviro(char **myargs, char  **forehead);
+int simpleshell_unsetenviro(char **myargs, char  **forehead);
+int simpleshell_cd(char **myargs, char  **forehead);
+int simpleshell_name(char **myargs, char  **forehead);
+int simpleshell_aid(char **myargs, char  **forehead);
 
-/**
- * struct list_s - A new struct type defining a linked list.
- * @dirctor: A dirctory path.
- * @next: A pointer to another struct list_s.
- */
-typedef struct list_s
-{
-	char *dirctor;
-	struct list_s *next;
-} list_t;
 
-/**
- * struct builtin_s - A new struct type defining builtin commands.
- * @name: The name of the builtin command.
- * @f: A function pointer to the builtin command's function.
- */
-typedef struct builtin_s
-{
-	char *name;
-	int (*f)(char **myargv, char **forehead);
-} builtin_t;
+char **_copyenviro(void);
+void free_enviro(void);
+char **getenviro(const char *myvar);
 
-/**
- * struct names - A new struct defining names.
- * @name: The name of the name.
- * @value: The value of the name.
- * @next: A pointer to another struct names.
- */
-typedef struct names
-{
-	char *name;
-	char *value;
-	struct names *next;
-} name_t;
+int create_fault(char **myargs, int fau);
+char *fault_enviro(char **myargs);
+char *fault_1(char **myargs);
+char *fault_2_out(char **myargs);
+char *fault_2_cd(char **myargs);
+char *fault_2_syn(char **myargs);
+char *fault_404(char **myargs);
+char *fault_505(char **myargs);
 
-name_t *names;
-
-ssize_t getrange(char **rangeptr, size_t *m, FILE *flow);
-void *reallocte(void *pointer, unsigned int oldsize, unsigned int newsize);
-char **_strtok(char *range, char *delim);
-char *get_location(char *command);
-list_t *get_path_dirctory(char *path);
-int execute(char **myargs, char **forehead);
+name_t *add_name_end(name_t **forehead, char *name, char *value);
+void free_name_list(name_t *forehead);
+list_t *add_node_end(list_t **forehead, char *dirct);
 void free_list(list_t *forehead);
-char *intostr(int number);
+
+void aid_all(void);
+void aid_name(void);
+void aid_cd(void);
+void aid_out(void);
+void aid_aid(void);
+void aid_enviro(void);
+void aid_setenviro(void);
+void aid_unsetenviro(void);
+void aid_histo(void);
+
+int process_file_commands(char *file_path, int *exe_myret);
 
 #endif
 
