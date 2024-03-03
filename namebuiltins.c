@@ -7,7 +7,6 @@ void print_name(name_t *name);
 /**
  * simpleshell_name - Builtin command that either prints all names.
  * @myargs: An array of arguments.
- * @forehead: A double pointer to the beginning of myargs.
  * Return: If an fault occurs -1 Otherwise 0.
  */
 int simpleshell_name(char **myargs)

@@ -83,7 +83,7 @@ int stringsubstring(char *s, char *accept);
 int stringcompare(char *s1, char *s2);
 int stringncompare(const char *s1, const char *s2, size_t n);
 
-int (*get_builtin(char *command))(char **myargs, char **forehead);
+int (*my_builtin(char *command))(char **myargs, char **forehead);
 int simpleshell_out(char **myargs, char **forehead);
 int simpleshell_environme(char **myargs, char  **forehead);
 int simpleshell_setenviro(char **myargs);

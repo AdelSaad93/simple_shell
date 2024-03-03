@@ -1,26 +1,25 @@
 #include "main.h"
-int (*my_bultin(char *mycommand))(char **myargs);
+int (*my_builtin(char *mycommand))(char **myargs, char **forehead);
 int simpleshell_out(char **myargs, char **forehead);
 int simpleshell_cd(char **myargs);
 int simpleshell_aid(char **myargs);
 
 /**
- * my_bultin - Matches a command with a corresponding
+ * my_builtin - Matches a command with a corresponding
  *               simpleshell builtin function.
  * @mycommand: The command to match.
  *
  * Return: A function pointer to the corresponding builtin.
  */
-int (*my_bultin(char *mycommand))(char **myargs)
+int (*my_builtin(char *mycommand))(char **myargs, char **forehead)
 {
 	builtin_t functions[] = {
 		{ "out", simpleshell_out },
 		{ "environme", simpleshell_environme },
-		{ "setenviro", simpleshell_setenviro },
-		{ "unsetenviro", simpleshell_unsetenviro },
-		{ "cd", simpleshell_cd },
-		{ "name", simpleshell_name },
-		{ "aid", simpleshell_aid },
+		{ "setenviro", (int (*)(char **, char **))simpleshell_setenviro },
+		{ "unsetenviro", (int (*)(char **, char **))simpleshell_unsetenviro },
+		{ "name", (int (*)(char **, char **))simpleshell_name },
+		{ "aid", (int (*)(char **, char **))simpleshell_aid },
 		{ NULL, NULL }
 	};
 	int i;
@@ -159,7 +158,6 @@ int simpleshell_cd(char **myargs)
 /**
  * simpleshell_aid - Displays information about simpleshell builtin commands.
  * @myargs: An array of arguments.
- *
  * Return: If an fault occurs - -1.
  *         Otherwise - 0.
  */

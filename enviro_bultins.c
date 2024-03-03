@@ -32,8 +32,6 @@ int simpleshell(char **myargs)
 /**
  * simpleshell_setenviro - Changes or adds an environmemental variable.
  * @myargs: An array of arguments passed to the shell.
- * @forehead: A double pointer to the beginning of myargs.
- *
  * Return: If an fault occurs -1 Otherwise 0.
  */
 int simpleshell_setenviro(char **myargs)
@@ -83,8 +81,6 @@ int simpleshell_setenviro(char **myargs)
 /**
  * simpleshell_unsetenviro - Deletes an environmemental variable from the PATH.
  * @myargs: An array of arguments passed to the shell.
- * @forehead: A double pointer to the beginning of myargs.
- *
  * Return: If an fault occurs -1 Otherwise 0.
  *
  */

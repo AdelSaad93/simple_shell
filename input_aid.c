@@ -110,7 +110,7 @@ int run_myargs(char **myargs, char **forehead, int *exe_myret)
 	int myret, i;
 	int (*builtin)(char **myargs, char **forehead);
 
-	builtin = get_builtin(myargs[0]);
+	builtin = my_builtin(myargs[0]);
 
 	if (builtin)
 	{
