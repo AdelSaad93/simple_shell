@@ -37,7 +37,7 @@ typedef struct list_s
 typedef struct builtin_s
 {
 	char *name;
-	int (*f)(char **myargs);
+	int (*f)(char **myargs, char **forehead);
 } builtin_t;
 
 /**
