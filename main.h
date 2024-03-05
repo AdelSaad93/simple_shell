@@ -15,8 +15,8 @@
 #define out -3
 
 extern char **environme;
-char *name;
-int histo;
+extern char *name;
+extern int histo;
 
 /**
  * struct list_s - A new struct type defining a linked list.
@@ -37,7 +37,7 @@ typedef struct list_s
 typedef struct builtin_s
 {
 	char *name;
-	int (*f)(char **myargs, char **forehead);
+	int (*f)(char **argv, char **forhead);
 } builtin_t;
 
 /**
@@ -86,8 +86,8 @@ int stringncompare(const char *s1, const char *s2, size_t n);
 int (*my_builtin(char *command))(char **myargs, char **forehead);
 int simpleshell_out(char **myargs, char **forehead);
 int simpleshell_environme(char **myargs, char  **forehead);
-int simpleshell_setenviro(char **myargs);
-int simpleshell_unsetenviro(char **myargs);
+int simpleshell_setenviro(char **myargs, char **forehead);
+int simpleshell_unsetenviro(char **myargs, char **forehead);
 int simpleshell_cd(char **myargs);
 int simpleshell_name(char **myargs);
 int simpleshell_aid(char **myargs);
